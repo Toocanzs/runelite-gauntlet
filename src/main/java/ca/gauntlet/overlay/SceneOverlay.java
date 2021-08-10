@@ -42,6 +42,7 @@ import javax.inject.Singleton;
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.NPC;
+import net.runelite.api.ObjectID;
 import net.runelite.api.Perspective;
 import net.runelite.api.Player;
 import net.runelite.api.coords.LocalPoint;
@@ -97,7 +98,7 @@ public class SceneOverlay extends Overlay
 
 	private void renderResources(final Graphics2D graphics2D)
 	{
-		if (!config.resourceOverlay() || plugin.getResources().isEmpty())
+		if (!config.isOverlayResource() || plugin.getResources().isEmpty())
 		{
 			return;
 		}
@@ -106,6 +107,11 @@ public class SceneOverlay extends Overlay
 
 		for (final Resource resource : plugin.getResources())
 		{
+			if (!isResourceOverlayEnabled(resource))
+			{
+				continue;
+			}
+
 			final GameObject gameObject = resource.getGameObject();
 
 			final LocalPoint localPointGameObject = gameObject.getLocalLocation();
@@ -115,20 +121,17 @@ public class SceneOverlay extends Overlay
 				continue;
 			}
 
-			if (config.resourceOverlay())
+			final Polygon polygon = Perspective.getCanvasTilePoly(client, localPointGameObject);
+
+			if (polygon == null)
 			{
-				final Polygon polygon = Perspective.getCanvasTilePoly(client, localPointGameObject);
-
-				if (polygon == null)
-				{
-					continue;
-				}
-
-				drawOutlineAndFill(graphics2D, config.resourceTileOutlineColor(), config.resourceTileFillColor(),
-					config.resourceTileOutlineWidth(), polygon);
-
-				OverlayUtil.renderImageLocation(client, graphics2D, localPointGameObject, resource.getIcon(), 0);
+				continue;
 			}
+
+			drawOutlineAndFill(graphics2D, config.resourceTileOutlineColor(), config.resourceTileFillColor(),
+				config.resourceTileOutlineWidth(), polygon);
+
+			OverlayUtil.renderImageLocation(client, graphics2D, localPointGameObject, resource.getIcon(), 0);
 		}
 	}
 
@@ -258,5 +261,28 @@ public class SceneOverlay extends Overlay
 		}
 
 		return localPoint.distanceTo(playerLocation) >= maxDistance;
+	}
+
+	private boolean isResourceOverlayEnabled(final Resource resource)
+	{
+		switch (resource.getGameObject().getId()) {
+			case ObjectID.CRYSTAL_DEPOSIT:
+			case ObjectID.CORRUPT_DEPOSIT:
+				return config.isOverlayResourceOreDeposit();
+			case ObjectID.PHREN_ROOTS:
+			case ObjectID.PHREN_ROOTS_36066:
+				return config.isOverlayResourcePhrenRoots();
+			case ObjectID.LINUM_TIRINUM:
+			case ObjectID.LINUM_TIRINUM_36072:
+				return config.isOverlayResourceLinumTirinum();
+			case ObjectID.GRYM_ROOT:
+			case ObjectID.GRYM_ROOT_36070:
+				return config.isOverlayResourceGrymRoot();
+			case ObjectID.FISHING_SPOT_36068:
+			case ObjectID.FISHING_SPOT_35971:
+				return config.isOverlayResourceFishingSpot();
+			default:
+				return false;
+		}
 	}
 }

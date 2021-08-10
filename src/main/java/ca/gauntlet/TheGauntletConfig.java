@@ -47,17 +47,25 @@ public interface TheGauntletConfig extends Config
 	// Sections
 
 	@ConfigSection(
-		name = "Resources",
-		description = "Resources section.",
+		name = "Resource Tracking",
+		description = "Resource Tracking section.",
 		position = 0,
 		closedByDefault = true
 	)
-	String resourcesSection = "resources";
+	String resourceTrackingSection = "resourceTracking";
+
+	@ConfigSection(
+		name = "Resource Overlay",
+		description = "Resource Overlay section.",
+		position = 1,
+		closedByDefault = true
+	)
+	String resourceOverlaySection = "resourceOverlay";
 
 	@ConfigSection(
 		name = "Utilities",
 		description = "Utilities section.",
-		position = 1,
+		position = 2,
 		closedByDefault = true
 	)
 	String utilitiesSection = "utilities";
@@ -65,7 +73,7 @@ public interface TheGauntletConfig extends Config
 	@ConfigSection(
 		name = "Hunllef",
 		description = "Hunllef section.",
-		position = 2,
+		position = 3,
 		closedByDefault = true
 	)
 	String hunllefSection = "hunllef";
@@ -73,7 +81,7 @@ public interface TheGauntletConfig extends Config
 	@ConfigSection(
 		name = "Npcs",
 		description = "Npcs section.",
-		position = 3,
+		position = 4,
 		closedByDefault = true
 	)
 	String npcsSection = "npcs";
@@ -81,7 +89,7 @@ public interface TheGauntletConfig extends Config
 	@ConfigSection(
 		name = "Timer",
 		description = "Timer section.",
-		position = 4,
+		position = 5,
 		closedByDefault = true
 	)
 	String timerSection = "timer";
@@ -89,21 +97,215 @@ public interface TheGauntletConfig extends Config
 	@ConfigSection(
 		name = "Other",
 		description = "Other section.",
-		position = 5,
+		position = 6,
 		closedByDefault = true
 	)
 	String otherSection = "other";
 
-	// Resources
+	// Resource Tracking section
 
 	@ConfigItem(
-		name = "Overlay resource icon and tile",
-		description = "Overlay resources with a respective icon and tile outline.",
+		name = "Track resources",
+		description = "Track resources in counter infoboxes.",
 		position = 0,
-		keyName = "resourceOverlay",
-		section = "resources"
+		keyName = "resourceTracker",
+		section = "resourceTracking"
 	)
-	default boolean resourceOverlay()
+	default boolean resourceTracker()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Ore",
+		description = "The desired number of ores to acquire.",
+		position = 1,
+		keyName = "resourceOre",
+		section = "resourceTracking"
+	)
+	default int resourceOre()
+	{
+		return 3;
+	}
+
+	@ConfigItem(
+		name = "Phren bark",
+		description = "The desired number of phren barks to acquire.",
+		position = 2,
+		keyName = "resourceBark",
+		section = "resourceTracking"
+	)
+	default int resourceBark()
+	{
+		return 3;
+	}
+
+	@ConfigItem(
+		name = "Linum tirinum",
+		description = "The desired number of linum tirinums to acquire.",
+		position = 3,
+		keyName = "resourceTirinum",
+		section = "resourceTracking"
+	)
+	default int resourceTirinum()
+	{
+		return 3;
+	}
+
+	@ConfigItem(
+		name = "Grym leaf",
+		description = "The desired number of grym leaves to acquire.",
+		position = 4,
+		keyName = "resourceGrym",
+		section = "resourceTracking"
+	)
+	default int resourceGrym()
+	{
+		return 2;
+	}
+
+	@ConfigItem(
+		name = "Weapon frames",
+		description = "The desired number of weapon frames to acquire.",
+		position = 5,
+		keyName = "resourceFrame",
+		section = "resourceTracking"
+	)
+	default int resourceFrame()
+	{
+		return 2;
+	}
+
+	@ConfigItem(
+		name = "Paddlefish",
+		description = "The desired number of paddlefish to acquire.",
+		position = 6,
+		keyName = "resourcePaddlefish",
+		section = "resourceTracking"
+	)
+	default int resourcePaddlefish()
+	{
+		return 20;
+	}
+
+	@ConfigItem(
+		name = "Crystal shards",
+		description = "The desired number of crystal shards to acquire.",
+		position = 7,
+		keyName = "resourceShard",
+		section = "resourceTracking"
+	)
+	default int resourceShard()
+	{
+		return 320;
+	}
+
+	@ConfigItem(
+		name = "Bowstring",
+		description = "Whether or not to acquire the crystalline or corrupted bowstring.",
+		position = 8,
+		keyName = "resourceBowstring",
+		section = "resourceTracking"
+	)
+	default boolean resourceBowstring()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Spike",
+		description = "Whether or not to acquire the crystal or corrupted spike.",
+		position = 9,
+		keyName = "resourceSpike",
+		section = "resourceTracking"
+	)
+	default boolean resourceSpike()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Orb",
+		description = "Whether or not to acquire the crystal or corrupted orb.",
+		position = 10,
+		keyName = "resourceOrb",
+		section = "resourceTracking"
+	)
+	default boolean resourceOrb()
+	{
+		return false;
+	}
+
+	// Resource Overlay section
+
+	@ConfigItem(
+		name = "Overlay resources",
+		description = "Enable or disable resource overlays.",
+		position = 0,
+		keyName = "isOverlayResource",
+		section = "resourceOverlay"
+	)
+	default boolean isOverlayResource()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Ore Deposit",
+		description = "Whether or not to overlay ore deposits.",
+		position = 1,
+		keyName = "isOverlayResourceOreDeposit",
+		section = "resourceOverlay"
+	)
+	default boolean isOverlayResourceOreDeposit()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Phren Roots",
+		description = "Whether or not to overlay phren roots.",
+		position = 2,
+		keyName = "isOverlayResourcePhrenRoots",
+		section = "resourceOverlay"
+	)
+	default boolean isOverlayResourcePhrenRoots()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Linum Tirinum",
+		description = "Whether or not to overlay linum tirinum.",
+		position = 3,
+		keyName = "isOverlayResourceLinumTirinum",
+		section = "resourceOverlay"
+	)
+	default boolean isOverlayResourceLinumTirinum()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Grym Root",
+		description = "Whether or not to overlay grym roots.",
+		position = 4,
+		keyName = "isOverlayResourceGrymRoot",
+		section = "resourceOverlay"
+	)
+	default boolean isOverlayResourceGrymRoot()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		name = "Fishing Spot",
+		description = "Whether or not to overlay fishing spots.",
+		position = 5,
+		keyName = "isOverlayResourceFishingSpot",
+		section = "resourceOverlay"
+	)
+	default boolean isOverlayResourceFishingSpot()
 	{
 		return false;
 	}
@@ -115,9 +317,9 @@ public interface TheGauntletConfig extends Config
 	@ConfigItem(
 		name = "Icon size",
 		description = "Change the size of the resource icons.",
-		position = 1,
+		position = 6,
 		keyName = "resourceIconSize",
-		section = "resources"
+		section = "resourceOverlay"
 	)
 	@Units(Units.PIXELS)
 	default int resourceIconSize()
@@ -132,9 +334,9 @@ public interface TheGauntletConfig extends Config
 	@ConfigItem(
 		name = "Tile outline width",
 		description = "Change the width of the resource tile outline.",
-		position = 2,
+		position = 7,
 		keyName = "resourceTileOutlineWidth",
-		section = "resources"
+		section = "resourceOverlay"
 	)
 	@Units(Units.PIXELS)
 	default int resourceTileOutlineWidth()
@@ -146,9 +348,9 @@ public interface TheGauntletConfig extends Config
 	@ConfigItem(
 		name = "Tile outline color",
 		description = "Change the tile outline color of resources.",
-		position = 3,
+		position = 8,
 		keyName = "resourceTileOutlineColor",
-		section = "resources"
+		section = "resourceOverlay"
 	)
 	default Color resourceTileOutlineColor()
 	{
@@ -159,145 +361,13 @@ public interface TheGauntletConfig extends Config
 	@ConfigItem(
 		name = "Tile fill color",
 		description = "Change the tile fill color of resources.",
-		position = 4,
+		position = 9,
 		keyName = "resourceTileFillColor",
-		section = "resources"
+		section = "resourceOverlay"
 	)
 	default Color resourceTileFillColor()
 	{
 		return new Color(255, 255, 255, 50);
-	}
-
-	@ConfigItem(
-		name = "Track resources",
-		description = "Track resources in counter infoboxes.",
-		position = 5,
-		keyName = "resourceTracker",
-		section = "resources"
-	)
-	default boolean resourceTracker()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		name = "Ore",
-		description = "The desired number of ores to acquire.",
-		position = 6,
-		keyName = "resourceOre",
-		section = "resources"
-	)
-	default int resourceOre()
-	{
-		return 3;
-	}
-
-	@ConfigItem(
-		name = "Phren bark",
-		description = "The desired number of phren barks to acquire.",
-		position = 7,
-		keyName = "resourceBark",
-		section = "resources"
-	)
-	default int resourceBark()
-	{
-		return 3;
-	}
-
-	@ConfigItem(
-		name = "Linum tirinum",
-		description = "The desired number of linum tirinums to acquire.",
-		position = 8,
-		keyName = "resourceTirinum",
-		section = "resources"
-	)
-	default int resourceTirinum()
-	{
-		return 3;
-	}
-
-	@ConfigItem(
-		name = "Grym leaf",
-		description = "The desired number of grym leaves to acquire.",
-		position = 9,
-		keyName = "resourceGrym",
-		section = "resources"
-	)
-	default int resourceGrym()
-	{
-		return 2;
-	}
-
-	@ConfigItem(
-		name = "Weapon frames",
-		description = "The desired number of weapon frames to acquire.",
-		position = 10,
-		keyName = "resourceFrame",
-		section = "resources"
-	)
-	default int resourceFrame()
-	{
-		return 2;
-	}
-
-	@ConfigItem(
-		name = "Paddlefish",
-		description = "The desired number of paddlefish to acquire.",
-		position = 11,
-		keyName = "resourcePaddlefish",
-		section = "resources"
-	)
-	default int resourcePaddlefish()
-	{
-		return 20;
-	}
-
-	@ConfigItem(
-		name = "Crystal shards",
-		description = "The desired number of crystal shards to acquire.",
-		position = 12,
-		keyName = "resourceShard",
-		section = "resources"
-	)
-	default int resourceShard()
-	{
-		return 320;
-	}
-
-	@ConfigItem(
-		name = "Bowstring",
-		description = "Whether or not to acquire the crystalline or corrupted bowstring.",
-		position = 13,
-		keyName = "resourceBowstring",
-		section = "resources"
-	)
-	default boolean resourceBowstring()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		name = "Spike",
-		description = "Whether or not to acquire the crystal or corrupted spike.",
-		position = 14,
-		keyName = "resourceSpike",
-		section = "resources"
-	)
-	default boolean resourceSpike()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		name = "Orb",
-		description = "Whether or not to acquire the crystal or corrupted orb.",
-		position = 15,
-		keyName = "resourceOrb",
-		section = "resources"
-	)
-	default boolean resourceOrb()
-	{
-		return false;
 	}
 
 	// Utilities Section
